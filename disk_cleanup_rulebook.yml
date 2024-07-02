@@ -1,0 +1,22 @@
+---
+- name: Clean up disk space
+  hosts: "{{ event.hostname }}"
+  tasks:
+    - name: Remove temporary files
+      file:
+        path: /tmp/*
+        state: absent
+
+    - name: Remove old log files
+      find:
+        paths: /var/log
+        age: 30d
+        recurse: yes
+      register: old_logs
+
+    - name: Delete old log files
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ old_logs.files }}"
+
