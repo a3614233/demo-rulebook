@@ -3,7 +3,7 @@
   hosts: localhost
   sources:
     - ansible.eda.webhook:
-        host: 0.0.0.0
+        host: 10.11.20.3
         port: 8080
         endpoint: /webhook
   rules:
@@ -11,5 +11,5 @@
       condition: event.disk_space < 20
       action:
         run_playbook:
-          name: disk_cleanup_playbook.yml
+          name: disk_cleanup_rulebook.yml
 
