@@ -6,18 +6,19 @@
         host: 0.0.0.0
         port: 5001
   rules:
-    #    - name: Low Disk Space
-    #      condition: event.disk_space < 20
-    #      action:
-    #        run_playbook:
-    #          name: disk_cleanup_rulebook.yml
     - name: print output
       condition: event.payload is defined
-      action:
-        debug:
-          msg:
-            - EVENT WAS NOT PROCESSED
-            - "EVENT IS {{ event }}"
-
-
+      actions:
+        - debug:
+            msg:
+              - EVENT WAS PROCESSED
+              - "EVENT IS {{ event }}"
+        - debug:
+            msg: "EVENT PAYLOAD IS {{ event.payload }}"
+        - run:
+            name: Send Notification
+            action:
+              module: some_notification_module
+              args:
+                event_source: "{{ event.payload.source }}"  # 确保这里的source字段正确
 
