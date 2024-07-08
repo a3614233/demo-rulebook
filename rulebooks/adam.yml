@@ -1,6 +1,6 @@
 ---
-- name: Zabbix Test rulebook
-  hosts: all
+- name: Disk Cleanup Rulebook
+  hosts: localhost
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
@@ -8,10 +8,16 @@
   rules:
     - name: print output
       condition: event.payload is defined
-      action:
-        debug:
-          msg:
-          - EVENT WAS NOT PROCESSED
-          - "EVENT IS {{ event.payload.info }}"
-
-
+      actions:
+        - debug:
+            msg:
+              - EVENT WAS PROCESSED
+              - "EVENT IS {{ event }}"
+        - debug:
+            msg: "EVENT PAYLOAD IS {{ event.payload }}"
+        - run:
+            name: Send Notification
+            action:
+              module: some_notification_module
+              args:
+                event_source: "{{ event.payload.source }}"  # 确保这里的source字段正确
