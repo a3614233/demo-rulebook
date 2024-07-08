@@ -3,13 +3,22 @@
   hosts: localhost
   sources:
     - ansible.eda.webhook:
-        host: 10.11.20.3
-        port: 8080
+        host: 10.11.21.93
+        port: 5001
         endpoint: /webhook
   rules:
-    - name: Low Disk Space
-      condition: event.disk_space < 20
+    #    - name: Low Disk Space
+    #      condition: event.disk_space < 20
+    #      action:
+    #        run_playbook:
+    #          name: disk_cleanup_rulebook.yml
+    - name: print output
+      condition: event.payload is defined
       action:
-        run_playbook:
-          name: disk_cleanup_rulebook.yml
+        debug:
+          msg:
+            - EVENT WAS NOT PROCESSED
+            - "EVENT IS {{ event }}"
+
+
 
