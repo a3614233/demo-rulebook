@@ -5,7 +5,6 @@
     - ansible.eda.webhook:
         host: 10.11.21.93
         port: 5001
-        endpoint: /webhook
   rules:
     #    - name: Low Disk Space
     #      condition: event.disk_space < 20
