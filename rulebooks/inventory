@@ -1,2 +1,2 @@
 [test]
-zabbix ansible_host=10.11.21.91
+zabbix ansible_host=10.11.20.3
