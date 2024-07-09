@@ -1,6 +1,6 @@
 ---
-- name: Disk Cleanup Rulebook
-  hosts: localhost
+- name: Debug Rulebook
+  hosts: all
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
