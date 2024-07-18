@@ -12,7 +12,7 @@
         debug:
           msg:
             - EVENT WAS NOT PROCESSED
-            - "EVENT IS {{ event.payload.info }}"
+            - "EVENT IS {{ event.payload }}"
 
 
 
