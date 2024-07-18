@@ -12,6 +12,7 @@
         debug:
           msg:
             - EVENT WAS NOT PROCESSED
-            - "EVENT IS {{ ansible_eda.event }}"
+            - "EVENT IS {{ event.payload.info }}"
+
 
 
